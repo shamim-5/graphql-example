@@ -4,6 +4,7 @@ export const resolvers = {
   Query: {
     //  greeting: () => "Hello world!",
     //  jobs: () => [],
+    company: (_root, { id }) => Company.findById(id),
     job: (_root, { id }) => Job.findById(id),
     jobs: () => Job.findAll(),
   },
