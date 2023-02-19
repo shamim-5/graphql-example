@@ -13,7 +13,7 @@ function JobBoard() {
       .catch((err) => setError(true));
   }, []);
 
-  // console.log('[JobBoard] jobs:', jobs);
+  console.log('[JobBoard] jobs:', jobs);
   if (error) {
     return <p style={{ color: "red" }}>Sorry, something went wrong.</p>;
   }
