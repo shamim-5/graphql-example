@@ -1,17 +1,19 @@
 import { request, gql } from "graphql-request";
+import { getAccessToken } from "../auth";
 
 const GRAPHQL_URL = "http://localhost:9000/graphql";
 
 export async function createJob(input) {
   const query = gql`
-  mutation createJobMutation($input: CreateJobInput!){
-    job: createJob(input: $input){
-      id
+    mutation createJobMutation($input: CreateJobInput!) {
+      job: createJob(input: $input) {
+        id
+      }
     }
-  }
-  `
+  `;
   const variables = { input };
-  const { job } = await request(GRAPHQL_URL, query, variables);
+  const headers = { Authorization: "Bearer " + getAccessToken() };
+  const { job } = await request(GRAPHQL_URL, query, variables, headers);
   return job;
 }
 
