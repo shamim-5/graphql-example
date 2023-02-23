@@ -10,10 +10,13 @@ function JobBoard() {
   useEffect(() => {
     getJobs()
       .then(setJobs)
-      .catch((err) => setError(true));
+      .catch((err) => {
+        console.error(err);
+        setError(true);
+      });
   }, []);
 
-  console.log('[JobBoard] jobs:', jobs);
+  console.log("[JobBoard] jobs:", jobs);
   if (error) {
     return <p style={{ color: "red" }}>Sorry, something went wrong.</p>;
   }
