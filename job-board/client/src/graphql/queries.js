@@ -4,10 +4,23 @@ import { getAccessToken } from "../auth";
 
 const GRAPHQL_URL = "http://localhost:9000/graphql";
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
   uri: GRAPHQL_URL,
   cache: new InMemoryCache(),
 });
+
+export const JOBS_QUERY = gql`
+  query JobsQuery {
+    jobs {
+      id
+      title
+      company {
+        id
+        name
+      }
+    }
+  }
+`;
 
 const JOB_DETAIL_FRAGMENT = gql`
   fragment JobDetail on Job {
@@ -21,9 +34,32 @@ const JOB_DETAIL_FRAGMENT = gql`
   }
 `;
 
-const JOB_QUERY = gql`
+export const JOB_QUERY = gql`
   query JobQuery($id: ID!) {
     job(id: $id) {
+      ...JobDetail
+    }
+  }
+  ${JOB_DETAIL_FRAGMENT}
+`;
+
+export const COMPANY_QUERY = gql`
+  query CompanyQuery($id: ID!) {
+    company(id: $id) {
+      id
+      name
+      description
+      jobs {
+        id
+        title
+      }
+    }
+  }
+`;
+
+export const CREATE_JOB_MUTATION = gql`
+  mutation createJobMutation($input: CreateJobInput!) {
+    job: createJob(input: $input) {
       ...JobDetail
     }
   }
@@ -34,7 +70,7 @@ export async function createJob(input) {
   const mutation = gql`
     mutation createJobMutation($input: CreateJobInput!) {
       job: createJob(input: $input) {
-       ...JobDetail
+        ...JobDetail
       }
     }
     ${JOB_DETAIL_FRAGMENT}

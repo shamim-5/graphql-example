@@ -88,5 +88,17 @@
     "title": "fragment",
     "description": "fragment JobDetail on Job{\n\n}",
     "companyId": "pVbRRBQtMVw6lUAkj1k43"
+  },
+  {
+    "id": "r4MVgmVYYCKexCb84GfnT",
+    "title": "mutate",
+    "description": "cache.writeQuery",
+    "companyId": "pVbRRBQtMVw6lUAkj1k43"
+  },
+  {
+    "id": "qCCGtt59xLVSzwVLPydEt",
+    "title": "adsadsadsadaadas",
+    "description": "asdsadasdsadsad",
+    "companyId": "pVbRRBQtMVw6lUAkj1k43"
   }
 ]
